@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31105.61
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Materials", "Materials.vcxproj", "{2444C099-B598-47E0-9A27-552933D8D57B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2444C099-B598-47E0-9A27-552933D8D57B}.Debug|x64.ActiveCfg = Debug|x64
+		{2444C099-B598-47E0-9A27-552933D8D57B}.Debug|x64.Build.0 = Debug|x64
+		{2444C099-B598-47E0-9A27-552933D8D57B}.Release|x64.ActiveCfg = Release|x64
+		{2444C099-B598-47E0-9A27-552933D8D57B}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B464C16-5962-43D5-9636-5D30C051F5C3}
+	EndGlobalSection
+EndGlobal

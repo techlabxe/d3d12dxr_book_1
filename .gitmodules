@@ -1,0 +1,9 @@
+[submodule "Externals/imgui"]
+	path = Externals/imgui
+	url = https://github.com/ocornut/imgui.git
+[submodule "Externals/DirectX-Headers"]
+	path = Externals/DirectX-Headers
+	url = https://github.com/microsoft/DirectX-Headers.git
+[submodule "Externals/tinygltf"]
+	path = Externals/tinygltf
+	url = https://github.com/syoyo/tinygltf.git

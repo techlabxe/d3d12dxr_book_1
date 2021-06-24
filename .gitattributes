@@ -1,0 +1,5 @@
+* -text
+*.vcxproj text eol=crlf
+*.h text eol=crlf
+*.cpp text eol=crlf
+*.bat text eol=crlf
