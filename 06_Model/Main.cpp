@@ -1,4 +1,3 @@
-#define DXRBOOK_FRAMEWORK_IMPLEMENTATION
 #include "ModelScene.h"
 
 #define WIN32_APPLICATION_IMPLEMENTATION
@@ -13,8 +12,6 @@ int APIENTRY wWinMain(
     _In_ int /*nCmdShow*/)
 {
     CoInitializeEx(NULL, COINIT_MULTITHREADED);
-    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-    //_CrtSetBreakAlloc(5453);
     ModelScene theApp(800, 600);
     return Win32Application::Run(&theApp, hInstance);
 }

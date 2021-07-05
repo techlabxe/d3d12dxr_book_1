@@ -1,6 +1,4 @@
-#define GRAPHICSDEVICE_IMPLEMENTATION
 #include "HelloTriangleApp.h"
-
 #include "Win32Application.h"
 
 #include "d3dx12.h"
@@ -9,6 +7,12 @@
 using namespace DirectX;
 
 static const wchar_t* DefaultHitgroup = L"DefaultHitGroup";
+
+HelloTriangle::HelloTriangle(UINT width, UINT height) : DxrBookFramework(width, height, L"HelloTriangle"),
+m_dispatchRayDesc{}
+{
+
+}
 
 void HelloTriangle::OnInit()
 {
@@ -375,7 +379,7 @@ void HelloTriangle::CreateStateObject()
 
 void HelloTriangle::CreateRootSignatureGlobal()
 {
-    std::array<D3D12_ROOT_PARAMETER, 2> rootParams;
+    std::array<D3D12_ROOT_PARAMETER, 2> rootParams{};
     
     // TLAS を t0 レジスタに割り当てて使用する設定.
     D3D12_DESCRIPTOR_RANGE descRangeTLAS{};

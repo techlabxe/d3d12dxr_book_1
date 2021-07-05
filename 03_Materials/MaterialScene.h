@@ -13,7 +13,7 @@ namespace AppHitGroups {
 
 class MaterialScene : public DxrBookFramework{
 public:
-    MaterialScene(UINT width, UINT height) : DxrBookFramework(width, height, L"MaterialScene") { }
+    MaterialScene(UINT width, UINT height);
 
     void OnInit() override;
     void OnDestroy() override;

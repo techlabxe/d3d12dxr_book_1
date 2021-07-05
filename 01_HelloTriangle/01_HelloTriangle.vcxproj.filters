@@ -38,6 +38,9 @@
     <ClCompile Include="HelloTriangleApp.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="..\common\src\GraphicsDevice.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="triangle-shaders.hlsl">

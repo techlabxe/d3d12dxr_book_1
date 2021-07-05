@@ -8,7 +8,7 @@ class HelloTriangle : public DxrBookFramework {
 public:
     using XMFLOAT3 = DirectX::XMFLOAT3;
 
-    HelloTriangle(UINT width, UINT height) : DxrBookFramework(width, height, L"HelloTriangle") { }
+    HelloTriangle(UINT width, UINT height);
     void OnInit() override;
     void OnDestroy() override;
 

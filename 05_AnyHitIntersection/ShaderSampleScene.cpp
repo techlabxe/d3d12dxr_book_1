@@ -1,4 +1,3 @@
-#define GRAPHICSDEVICE_IMPLEMENTATION
 #include "ShaderSampleScene.h"
 
 #include "Win32Application.h"
@@ -15,6 +14,11 @@
 
 using namespace DirectX;
 
+
+ShadersSampleScene::ShadersSampleScene(UINT width, UINT height) : DxrBookFramework(width, height, L"ShadersSample"),
+m_dispatchRayDescs(),m_sceneParam()
+{
+}
 
 void ShadersSampleScene::OnInit()
 {

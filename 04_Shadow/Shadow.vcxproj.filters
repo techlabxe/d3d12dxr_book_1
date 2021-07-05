@@ -86,6 +86,9 @@
     <ClCompile Include="..\common\src\util\DxrBookUtility.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="..\common\src\GraphicsDevice.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

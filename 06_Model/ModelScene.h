@@ -14,7 +14,7 @@ namespace AppHitGroups {
 
 class ModelScene : public DxrBookFramework {
 public:
-    ModelScene(UINT width, UINT height) : DxrBookFramework(width, height, L"ModelScene") { }
+    ModelScene(UINT width, UINT height);
 
     void OnInit() override;
     void OnDestroy() override;

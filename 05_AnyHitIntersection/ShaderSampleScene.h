@@ -16,7 +16,7 @@ namespace AppHitGroups {
 
 class ShadersSampleScene : public DxrBookFramework {
 public:
-    ShadersSampleScene(UINT width, UINT height) : DxrBookFramework(width, height, L"ShadersSample") { }
+    ShadersSampleScene(UINT width, UINT height);
 
     void OnInit() override;
     void OnDestroy() override;

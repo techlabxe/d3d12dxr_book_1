@@ -1,5 +1,4 @@
-﻿#define GRAPHICSDEVICE_IMPLEMENTATION
-#include "MaterialScene.h"
+﻿#include "MaterialScene.h"
 
 #include "Win32Application.h"
 
@@ -23,6 +22,13 @@ namespace {
         XMVectorSet(0.2f, 0.3f, 0.6f, 0.0f),
         XMVectorSet(0.1f, 0.8f, 0.9f, 0.0f),
     };
+}
+
+MaterialScene::MaterialScene(UINT width, UINT height) : DxrBookFramework(width, height, L"MaterialScene"),
+m_meshPlane(), m_meshSphere(), m_dispatchRayDesc(), m_sceneParam(),
+m_spheresReflect(), m_spheresRefract(), m_spheresNormal(),
+m_normalSphereMaterials()
+{
 }
 
 void MaterialScene::OnInit()

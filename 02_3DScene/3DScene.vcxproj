@@ -111,6 +111,7 @@ copy "$(WindowsSdkDir)Redist\D3D\$(PlatformTarget)\dxil.dll" $(ProjectDir)dxil.d
     <ClInclude Include="HelloScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\common\src\GraphicsDevice.cpp" />
     <ClCompile Include="..\common\src\util\Camera.cpp" />
     <ClCompile Include="..\common\src\util\DxrBookUtility.cpp" />
     <ClCompile Include="..\Externals\imgui\backends\imgui_impl_dx12.cpp" />

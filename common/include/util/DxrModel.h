@@ -20,7 +20,7 @@ namespace util {
 
     class DxrModelActor;
 
-
+    // モデルデータを表現するクラス.
     class DxrModel {
     public:
         using XMFLOAT2 = DirectX::XMFLOAT2;
@@ -39,13 +39,15 @@ namespace util {
 
         void Destroy(std::unique_ptr<dx12::GraphicsDevice>& device);
 
+        // モデルのロード.
         bool LoadFromGltf(
             const std::wstring& fileName,
             std::unique_ptr<dx12::GraphicsDevice>& device);
 
-
+        // 描画用のアクタを生成する.
         std::shared_ptr<DxrModelActor> Create(std::unique_ptr<dx12::GraphicsDevice>& device);
 
+        // 各階層や関節を表現するノードクラス.
         class Node {
         public:
             Node();
@@ -63,6 +65,8 @@ namespace util {
             int meshIndex = -1;
             friend class DxrModel;
         };
+
+        // ポリゴン情報.
         class Mesh {
         private:
             UINT indexStart;
@@ -73,6 +77,8 @@ namespace util {
 
             friend class DxrModel;
         };
+
+        // 同じノードに関連するポリゴンメッシュを束ねたデータ.
         class MeshGroup {
         private:
             std::vector<Mesh> m_meshes;
@@ -80,6 +86,7 @@ namespace util {
             friend class DxrModel;
         };
 
+        // スキニング用情報.
         class Skin {
         private:
             std::wstring name;
@@ -88,6 +95,7 @@ namespace util {
             friend class DxrModel;
         };
 
+        // マテリアル.
         class Material {
         public:
             Material() : m_name(), m_textureIndex(-1), m_diffuseColor(1, 1, 1) { }
@@ -102,11 +110,16 @@ namespace util {
             friend class DxrModel;
         };
 
+        // 位置情報バッファの取得.
         D3D12Resource GetPositionBuffer() const { return m_vertexAttrib.Position; }
+        // 法線情報バッファの取得.
         D3D12Resource GetNormalBuffer() const { return m_vertexAttrib.Normal; }
+        // インデックスバッファの取得.
         D3D12Resource GetIndexBuffer() const { return m_indexBuffer; }
 
+        // ジョイント用インデックスバッファの取得.
         D3D12Resource GetJointIndicesBuffer() const { return m_vertexAttrib.JointIndices; }
+        // ジョイント用ウェイトバッファの取得.
         D3D12Resource GetJointWeightsBuffer() const { return m_vertexAttrib.JointWeights; }
 
     private:
@@ -157,6 +170,8 @@ namespace util {
         friend class DxrModelActor;
     };
 
+    // 描画で使用するアクタクラス.
+    // DxrModelクラスより生成する.
     class DxrModelActor {
     public:
         using XMFLOAT2 = DirectX::XMFLOAT2;
@@ -289,24 +304,35 @@ namespace util {
 
         DxrModelActor() = delete;
 
+        // 本オブジェクトを配置するワールド行列をセットする.
         void SetWorldMatrix(XMMATRIX mtxWorld) { m_mtxWorld = mtxWorld; }
+
+        // 本オブジェクト配置のためのワールド行列を取得する.
         XMMATRIX GetWorldMatrix() const { return m_mtxWorld; }
+
+        // 生成元となったモデルを取得.
         const DxrModel* GetModel() const { return m_modelReference; }
 
+        // 各ノードの行列を更新する.
         void UpdateMatrices();
         
-        void UpdateShapes();
-
+        // BLAS の取得.
         BLASResource GetBLAS() const { return m_blas; }
 
+        // メッシュグループ数を取得.
         UINT GetMeshGroupCount() const { return UINT(m_meshGroups.size()); }
+
+        // グループに含まれるメッシュの数を取得.
         UINT GetMeshCount(int groupIndex) const {
             return UINT(m_meshGroups[groupIndex].m_meshes.size());
         }
+
+        // ポリゴンメッシュの取得.
         const Mesh& GetMesh(int groupIndex, int meshIndex) const {
             return m_meshGroups[groupIndex].m_meshes[meshIndex];
         }
 
+        // 本Actorに含まれる全てのポリゴンメッシュ数.
         UINT GetMeshCountAll() const {
             UINT meshCount = 0;
             for (auto& group : m_meshGroups) {
@@ -319,6 +345,8 @@ namespace util {
         bool IsSkinned() const {
             return m_hasSkin;
         }
+
+        // 頂点数の取得.
         UINT GetSkinVertexCount() const;
        
         BufferResource GetDestPositionBuffer() const;

@@ -1,4 +1,3 @@
-#define GRAPHICSDEVICE_IMPLEMENTATION
 #include "ModelScene.h"
 
 #include "Win32Application.h"
@@ -16,6 +15,11 @@
 
 using namespace DirectX;
 
+
+ModelScene::ModelScene(UINT width, UINT height) : DxrBookFramework(width, height, L"ModelScene"),
+m_meshPlane(), m_dispatchRayDesc(), m_sceneParam(), m_guiParams()
+{
+}
 
 void ModelScene::OnInit()
 {

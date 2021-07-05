@@ -1,4 +1,3 @@
-#define DXRBOOK_FRAMEWORK_IMPLEMENTATION
 #include "ShaderSampleScene.h"
 
 #define WIN32_APPLICATION_IMPLEMENTATION

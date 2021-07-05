@@ -793,15 +793,6 @@ namespace util {
         }
     }
 
-    void DxrModelActor::UpdateShapes()
-    {
-        // 子供ノードのWorld行列をBLASの行列として使いたいため、いったん単位行列で更新.
-        auto mtxI = XMMatrixIdentity();
-        for (auto& node : m_nodes) {
-            node->UpdateMatrixHierarchy(mtxI);
-        }
-    }
-
     void DxrModelActor::Node::UpdateLocalMatrix()
     {
         auto mtxT = XMMatrixTranslationFromVector(translation);

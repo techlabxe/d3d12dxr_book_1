@@ -1,4 +1,3 @@
-#define GRAPHICSDEVICE_IMPLEMENTATION
 #include "HelloScene.h"
 
 #include "Win32Application.h"
@@ -14,6 +13,11 @@ using namespace DirectX;
 
 // #define USE_UTILS (1)
 // #define USE_RUNTIME_SHADER_COMPILE (1)
+
+HelloScene::HelloScene(UINT width, UINT height) : DxrBookFramework(width, height, L"3DScene"),
+m_dispatchRayDesc(), m_sceneParam()
+{
+}
 
 void HelloScene::OnInit()
 {

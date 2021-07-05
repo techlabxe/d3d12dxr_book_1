@@ -1,4 +1,3 @@
-#define GRAPHICSDEVICE_IMPLEMENTATION
 #include "ShadowScene.h"
 
 #include "Win32Application.h"
@@ -14,6 +13,12 @@
 #include "util/DxrBookUtility.h"
 
 using namespace DirectX;
+
+ShadowScene::ShadowScene(UINT width, UINT height) : DxrBookFramework(width, height, L"ShadowScene"),
+m_meshPlane(), m_meshSphere(), m_meshLightSphere(), m_dispatchRayDesc(),
+m_sceneParam(),m_lightPos(), m_spheres()
+{
+}
 
 void ShadowScene::OnInit()
 {

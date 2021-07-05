@@ -11,7 +11,7 @@ namespace AppHitGroups {
 
 class HelloScene : public DxrBookFramework{
 public:
-    HelloScene(UINT width, UINT height) : DxrBookFramework(width, height, L"3DScene") { }
+    HelloScene(UINT width, UINT height);
 
     void OnInit() override;
     void OnDestroy() override;

@@ -14,7 +14,7 @@ namespace AppHitGroups {
 
 class ShadowScene : public DxrBookFramework {
 public:
-    ShadowScene(UINT width, UINT height) : DxrBookFramework(width, height, L"ShadowScene") { }
+    ShadowScene(UINT width, UINT height);
 
     void OnInit() override;
     void OnDestroy() override;

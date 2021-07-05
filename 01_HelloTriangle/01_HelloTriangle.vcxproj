@@ -98,6 +98,7 @@ copy "$(WindowsSdkDir)Redist\D3D\$(PlatformTarget)\dxil.dll" $(ProjectDir)dxil.d
     <ClInclude Include="HelloTriangleApp.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\common\src\GraphicsDevice.cpp" />
     <ClCompile Include="HelloTriangleApp.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
