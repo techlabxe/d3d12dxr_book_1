@@ -48,7 +48,7 @@ private:
     void CreateRayGenLocalRootSignature();
 
     // スフィア用のローカルルートシグネチャを生成します.
-    void CreateSphereLocalRootSignature();
+    void CreateFenceLocalRootSignature();
 
     // 床用のローカルルートシグネチャを生成します.
     void CreateFloorLocalRootSignature();

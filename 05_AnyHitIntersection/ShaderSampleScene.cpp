@@ -42,7 +42,7 @@ void ShadersSampleScene::OnInit()
     // ローカル Root Signature を用意.
     CreateRayGenLocalRootSignature();
     CreateFloorLocalRootSignature();
-    CreateSphereLocalRootSignature();
+    CreateFenceLocalRootSignature();
     CreateAnalyticPrimsLocalRootSignature();
 
     // コンパイル済みシェーダーよりステートオブジェクトを用意.
@@ -444,13 +444,13 @@ void ShadersSampleScene::CreateSceneObjects()
     }
     vstride = UINT(sizeof(util::primitive::VertexPNT));
     istride = UINT(sizeof(UINT));
-    auto vbSphereSize = vstride * planeXYVerts.size();
-    auto ibSphereSize = istride * indices.size();
+    auto vbFenceSize = vstride * planeXYVerts.size();
+    auto ibFenceSize = istride * indices.size();
     m_meshFence.vertexBuffer = util::CreateBuffer(
-        m_device, vbSphereSize, planeXYVerts.data(), 
+        m_device, vbFenceSize, planeXYVerts.data(), 
         heapType, flags, L"FenceVB");
     m_meshFence.indexBuffer = util::CreateBuffer(
-        m_device, ibSphereSize, indices.data(), 
+        m_device, ibFenceSize, indices.data(), 
         heapType, flags, L"FenceIB");
     m_meshFence.vertexCount = UINT(planeXYVerts.size());
     m_meshFence.indexCount = UINT(indices.size());
@@ -489,8 +489,8 @@ void ShadersSampleScene::CreateSceneObjects()
 void ShadersSampleScene::CreateSceneBLAS()
 {
     auto floorGeomDesc = util::GetGeometryDesc(m_meshPlane);
-    auto sphereGeomDesc = util::GetGeometryDesc(m_meshFence);
-    sphereGeomDesc.Flags = D3D12_RAYTRACING_GEOMETRY_FLAG_NONE;
+    auto fenceGeomDesc = util::GetGeometryDesc(m_meshFence);
+    fenceGeomDesc.Flags = D3D12_RAYTRACING_GEOMETRY_FLAG_NONE;
 
     auto aabbGeomDesc = util::GetGeometryDesc(m_meshAABB);
     auto sdfGeomDesc = util::GetGeometryDesc(m_meshSDF);
@@ -515,12 +515,12 @@ void ShadersSampleScene::CreateSceneBLAS()
     command->BuildRaytracingAccelerationStructure(
         &asDesc, 0, nullptr);
 
-    // Sphere の分.
+    // Fence の分.
     inputs.NumDescs = 1;
-    inputs.pGeometryDescs = &sphereGeomDesc;
-    auto sphereASB = util::CreateAccelerationStructure(m_device, asDesc);
-    asDesc.ScratchAccelerationStructureData = sphereASB.scratch->GetGPUVirtualAddress();
-    asDesc.DestAccelerationStructureData = sphereASB.asbuffer->GetGPUVirtualAddress();
+    inputs.pGeometryDescs = &fenceGeomDesc;
+    auto fenceASB = util::CreateAccelerationStructure(m_device, asDesc);
+    asDesc.ScratchAccelerationStructureData = fenceASB.scratch->GetGPUVirtualAddress();
+    asDesc.DestAccelerationStructureData = fenceASB.asbuffer->GetGPUVirtualAddress();
     command->BuildRaytracingAccelerationStructure(
         &asDesc, 0, nullptr);
 
@@ -545,7 +545,7 @@ void ShadersSampleScene::CreateSceneBLAS()
     // BLAS のバッファに UAV バリアを設定する.
     std::vector<CD3DX12_RESOURCE_BARRIER> uavBarriers;
     uavBarriers.emplace_back(CD3DX12_RESOURCE_BARRIER::UAV(floorASB.asbuffer.Get()));
-    uavBarriers.emplace_back(CD3DX12_RESOURCE_BARRIER::UAV(sphereASB.asbuffer.Get()));
+    uavBarriers.emplace_back(CD3DX12_RESOURCE_BARRIER::UAV(fenceASB.asbuffer.Get()));
     uavBarriers.emplace_back(CD3DX12_RESOURCE_BARRIER::UAV(aabbASB.asbuffer.Get()));
     uavBarriers.emplace_back(CD3DX12_RESOURCE_BARRIER::UAV(sdfASB.asbuffer.Get()));
 
@@ -557,7 +557,7 @@ void ShadersSampleScene::CreateSceneBLAS()
 
     // この先は BLAS のバッファのみ使うのでメンバ変数に代入しておく.
     m_meshPlane.blas = floorASB.asbuffer;
-    m_meshFence.blas = sphereASB.asbuffer;
+    m_meshFence.blas = fenceASB.asbuffer;
     m_meshAABB.blas = aabbASB.asbuffer;
     m_meshSDF.blas = sdfASB.asbuffer;
 
@@ -767,7 +767,7 @@ void ShadersSampleScene::CreateRayGenLocalRootSignature()
     m_rsRGS = rshelper.Create(m_device, isLocal, L"lrsRayGen");
 }
 
-void ShadersSampleScene::CreateSphereLocalRootSignature()
+void ShadersSampleScene::CreateFenceLocalRootSignature()
 {
     const UINT space = 1;
     // [0] : ディスクリプタ, t0(space1), インデックスバッファ.
