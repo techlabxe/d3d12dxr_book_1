@@ -240,8 +240,6 @@ namespace util {
                 auto srv = util::CreateStructuredSRV(device, dstSkinInfo.bufJointMatrices, jointCount, offset, stride);
                 dstSkinInfo.bufJointMatricesDescriptors.push_back(srv);
             }
-
-            //dstSkinInfo.jointMatricesCB.Initialize(device, jointCBSize, L"JointMatrices");
         }
 
         // BLAS 構築時に設定する行列バッファを確保.

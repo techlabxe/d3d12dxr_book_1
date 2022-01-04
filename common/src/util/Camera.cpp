@@ -94,7 +94,6 @@ namespace util {
         toTarget = XMVector3Normalize(toTarget);
 
         auto delta = toTargetLength * d;
-        auto newLen = toTargetLength + delta;
         m_eye += toTarget * delta;
 
         m_mtxView = XMMatrixLookAtRH(m_eye, m_target, m_up);
